@@ -129,11 +129,9 @@ EOF
 
 }
 
-# Create the launch configuration for instances created
-resource "aws_launch_configuration" "dylanmtaylor" {
-
-  name_prefix                 = "dylanmtaylor"
-  image_id                    = data.aws_ami.ubuntu.id
+# Create the instance itself
+resource "aws_instance" "dylanmtaylor" {
+  ami                         = data.aws_ami.ubuntu.id
   associate_public_ip_address = true
   instance_type               = var.instance_flavor
   key_name                    = var.ssh_key_name
@@ -155,12 +153,16 @@ resource "aws_launch_configuration" "dylanmtaylor" {
     create_before_destroy = true
   }
 
+  tags = {
+    Name = "dylanmtaylor"
+  }
 }
 
-resource "aws_autoscaling_group" "dylanmtaylor" {
-  name                 = "dylanmtaylor"
-  launch_configuration = aws_launch_configuration.dylanmtaylor.name
-  min_size             = 1
-  max_size             = 2
-  vpc_zone_identifier  = ["${aws_subnet.main.id}"]
+resource "aws_eip" "dylanmtaylor" {
+  instance = aws_instance.dylanmtaylor.id
+  vpc = true
+
+  tags = {
+    Name = "dylanmtaylor"
+  }
 }
