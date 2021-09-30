@@ -135,8 +135,9 @@ resource "aws_instance" "dylanmtaylor" {
   associate_public_ip_address = true
   instance_type               = var.instance_flavor
   key_name                    = var.ssh_key_name
-  security_groups             = ["${aws_security_group.dylanmtaylor.id}"]
+  vpc_security_group_ids      = ["${aws_security_group.dylanmtaylor.id}"]
   iam_instance_profile        = aws_iam_instance_profile.ssm.id
+  subnet_id                   = "${aws_subnet.main.id}"
 
   user_data = file("${path.module}/dylanmtaylor_cloudinit.yml.tpl")
 
