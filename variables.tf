@@ -8,7 +8,7 @@ variable "ssh_public_key" {
 }
 
 variable "ssh_key_name" {
-  default = "Dylan Taylor"
+  default = "Dylan M. Taylor"
 }
 
 variable "instance_flavor" {

@@ -19,7 +19,7 @@ data "aws_ami" "ubuntu" {
 module "key_pair" {
   source = "terraform-aws-modules/key-pair/aws"
 
-  key_name   = "Dylan M. Taylor"
+  key_name   = var.ssh_key_name
   public_key = var.ssh_public_key
 }
 
@@ -136,7 +136,7 @@ resource "aws_launch_configuration" "dylanmtaylor" {
   image_id                    = data.aws_ami.ubuntu.id
   associate_public_ip_address = true
   instance_type               = var.instance_flavor
-  key_name                    = "Dylan M. Taylor"
+  key_name                    = var.ssh_key_name
   security_groups             = ["${aws_security_group.dylanmtaylor.id}"]
   iam_instance_profile        = aws_iam_instance_profile.ssm.id
 
