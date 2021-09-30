@@ -142,7 +142,7 @@ resource "aws_instance" "dylanmtaylor" {
   user_data = file("${path.module}/dylanmtaylor_cloudinit.yml.tpl")
 
   root_block_device {
-    volume_size           = 20
+    volume_size           = 15
     volume_type           = "gp3"
     iops                  = 3000
     throughput            = 125
