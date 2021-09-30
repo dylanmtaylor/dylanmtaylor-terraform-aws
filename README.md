@@ -1,4 +1,4 @@
-# Terraform for Deploying DylanMTaylor to AWS
+# Terraform for deploying dylanmtaylor.com to AWS
 
 ## Usage
 
